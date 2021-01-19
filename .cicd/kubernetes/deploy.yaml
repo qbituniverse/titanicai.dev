@@ -1,0 +1,138 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: titanicai
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: titanicai-api
+  namespace: titanicai
+  labels:
+    app: titanicai-api
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  selector:
+    matchLabels:
+      app: titanicai-api
+  template:
+    metadata:
+      labels:
+        app: titanicai-api
+    spec:
+      containers:
+      - name: titanicai-api
+        image: qbituniverse/titanicai-api:latest
+        ports:
+        - containerPort: 8000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: titanicai-api-lb
+  namespace: titanicai
+spec:
+  selector:
+    app: titanicai-api
+  ports:
+  - protocol: TCP
+    port: 8011
+    targetPort: 8000
+  type: LoadBalancer
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: titanicai-api-ip
+  namespace: titanicai
+spec:
+  selector:
+    app: titanicai-api
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8000
+  type: ClusterIP
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: titanicai-webapp
+  namespace: titanicai
+  labels:
+    app: titanicai-webapp
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  selector:
+    matchLabels:
+      app: titanicai-webapp
+  template:
+    metadata:
+      labels:
+        app: titanicai-webapp
+    spec:
+      containers:
+      - name: titanicai-webapp
+        image: qbituniverse/titanicai-webapp:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          valueFrom:
+            configMapKeyRef:
+              name: titanicai-webapp-config
+              key: Environment
+        - name: WebApp__AiApi__BaseUri
+          valueFrom:
+            configMapKeyRef:
+              name: titanicai-webapp-config
+              key: BaseUri
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: titanicai-webapp
+  namespace: titanicai
+spec:
+  selector:
+    app: titanicai-webapp
+  ports:
+  - protocol: TCP
+    port: 8010
+    targetPort: 80
+  type: LoadBalancer
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: titanicai-webapp-config
+  namespace: titanicai
+data:
+  Environment: Development
+  BaseUri: http://titanicai-api-ip.titanicai.svc.cluster.local

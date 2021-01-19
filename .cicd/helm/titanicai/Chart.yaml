@@ -1,0 +1,7 @@
+apiVersion: v2
+version: 1.0
+name: titanicai
+description: A Helm chart for TitanicAI application
+maintainers:
+  - name: Marcin Narloch
+    email: marcin.narloch@qbituniverse.com

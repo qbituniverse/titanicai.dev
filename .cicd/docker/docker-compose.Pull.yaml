@@ -1,0 +1,28 @@
+version: '3'
+services:
+  api:
+    image: qbituniverse/titanicai-api:latest
+    container_name: titanicai-api
+    ports:
+      - 8011:8000
+    tty: true
+    networks:
+      - titanicai-bridge
+
+  webapp:
+    image: qbituniverse/titanicai-webapp:latest
+    depends_on:
+      - api
+    container_name: titanicai-webapp
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - WebApp__AiApi__BaseUri=http://titanicai-api:8000
+    ports:
+      - 8010:80
+    tty: true
+    networks:
+      - titanicai-bridge
+
+networks:
+  titanicai-bridge:
+    driver: bridge

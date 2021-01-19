@@ -1,0 +1,15 @@
+FROM qbituniverse/ai-r-core-api-java:4.0.254
+
+LABEL version="4.0" \
+ 	  description="Image to create R Api for the TitanicAI project" \
+	  maintainer="marcin.narloch@qbituniverse.com"
+
+RUN R -e "install.packages(c('gmodels', 'e1071', 'caret', 'caretEnsemble', 'C50', 'vcd', 'FSelector', 'rpart', 'party', 'RWeka', 'nnet', 'kernlab', 'naivebayes', 'fastAdaboost'), lib = '/usr/local/lib/R/site-library')" && \
+	rm -rf /usr/lib/R/library && \
+	rm -rf /var/lib/apt/lists/* && \
+	rm -rf /tmp/*
+
+COPY /code/ /code/
+COPY /models/titanicai_model.rds /models/
+
+CMD ["Rscript", "/code/exec/api.R"]
