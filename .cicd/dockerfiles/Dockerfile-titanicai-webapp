@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS runtime
+FROM mcr.microsoft.com/dotnet/aspnet:5.0.2 AS runtime
 
 LABEL version="5.0" \
 	  description="Image to create WebApp for the TitanicAI project" \
@@ -7,12 +7,12 @@ LABEL version="5.0" \
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:5.0.102-1 AS build
 WORKDIR /src
-COPY ["WebApp/WebApp.csproj", "WebApp/"]
+COPY ["src/webapp/WebApp/WebApp.csproj", "WebApp/"]
 RUN dotnet restore "WebApp/WebApp.csproj"
 
-COPY . .
+COPY src/webapp .
 WORKDIR "/src/WebApp"
 RUN dotnet build "WebApp.csproj" -c Release -o /app
 

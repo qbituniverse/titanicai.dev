@@ -1,41 +1,36 @@
 #############################################################################
-# TitanicAI R Webapp
+# TitanicAI R Studio
 #############################################################################
-# path
-cd source/webapp
-
 # variables
-dockerfile="Dockerfile-titanicai-webapp"
-image="qbituniverse/titanicai-webapp:local"
-container="titanicai-webapp"
-network="titanicai-bridge"
-
+dockerfile="Dockerfile-titanicai-studio"
+image="qbituniverse/titanicai-studio:local"
+container="titanicai-studio"
 
 #############################################################################
-# Create, configure and work with Webapp
+# Create, configure and work with R Studio
 #############################################################################
 # build image
-docker build -t $image -f .cicd/docker/$dockerfile .
+docker build -t $image -f .cicd/dockerfiles/$dockerfile .
 
-# create network & container
-docker network create $network
-docker run --name $container -d -p 8010:80 --network=$network \
--e ASPNETCORE_ENVIRONMENT=Development \
--e WebApp__AiApi__BaseUri=http://titanicai-api:8000 \
-$image
+# create container
+docker run --name $container -d -p 8012:8787 -v $container:/home/rstudio -e DISABLE_AUTH=true $image
 
-# launch Webapp
-start http://localhost:8010
-
+# launch R Studio
+start http://localhost:8012
 
 #############################################################################
-# Container operations
+# Container operations and pull code down
 #############################################################################
 # start, stop, exec
 docker start $container
 docker stop $container
 docker exec -it $container bash
 
+# pull code from container
+docker cp $container:/home/rstudio/code/. ./src/model/code/
+docker cp $container:/home/rstudio/input/. ./src/model/input/
+docker cp $container:/home/rstudio/output/. ./src/model/output/
+docker cp $container:/home/rstudio/models/. ./src/model/models/
 
 #############################################################################
 # Clean-up
@@ -43,4 +38,3 @@ docker exec -it $container bash
 docker rm -fv $container
 docker volume rm -f $container
 docker rmi -f $image
-docker network rm $network

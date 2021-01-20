@@ -1,16 +1,13 @@
 #############################################################################
 # TitanicAI App - Kubernetes
 #############################################################################
-# path
-cd .cicd
-
 # set context
 kubectl config get-contexts
 kubectl config use-context docker-desktop
 kubectl config current-context
 
 # deploy
-kubectl apply -f kubernetes/deploy.yaml
+kubectl apply -f .cicd/kubernetes/deploy.yaml
 
 # check deployment
 kubectl get all -n titanicai
