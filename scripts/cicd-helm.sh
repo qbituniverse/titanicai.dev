@@ -1,16 +1,13 @@
 #############################################################################
 # TitanicAI App - Helm
 #############################################################################
-# path
-cd .cicd
-
 # set context
 kubectl config get-contexts
 kubectl config use-context docker-desktop
 kubectl config current-context
 
 # deploy app
-helm upgrade titanicai -i --create-namespace --namespace titanicai ./helm/titanicai
+helm upgrade titanicai -i --create-namespace --namespace titanicai .cicd/helm/titanicai
 
 # deploy ingress controller
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx

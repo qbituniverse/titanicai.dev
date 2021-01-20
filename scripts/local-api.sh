@@ -1,21 +1,17 @@
 #############################################################################
 # TitanicAI R Api
 #############################################################################
-# path
-cd source/model
-
 # variables
 dockerfile="Dockerfile-titanicai-api"
 image="qbituniverse/titanicai-api:local"
 container="titanicai-api"
 network="titanicai-bridge"
 
-
 #############################################################################
 # Create, configure and work with R Api
 #############################################################################
 # build image
-docker build -t $image -f .cicd/docker/$dockerfile .
+docker build -t $image -f .cicd/dockerfiles/$dockerfile .
 
 # create network & container
 docker network create $network
@@ -31,7 +27,6 @@ start http://localhost:8011/api/ping
 docker start $container
 docker stop $container
 docker exec -it $container bash
-
 
 #############################################################################
 # Clean-up

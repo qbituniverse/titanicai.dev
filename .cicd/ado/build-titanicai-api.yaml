@@ -7,9 +7,9 @@ trigger:
     - main
   paths:
     include:
-    - .cicd/docker/Dockerfile-titanicai-webapp
-    - .cicd/ado/build-titanicai-webapp.yaml
-    - WebApp
+    - .cicd/dockerfiles/Dockerfile-titanicai-api
+    - .cicd/ado/build-titanicai-api.yaml
+    - src/model/models/titanicai_model.rds
 
 pr: none
 
@@ -24,8 +24,8 @@ stages:
 - stage: DockerBuild
   displayName: 'Build Docker Image'
   variables:
-    imageDockerfile: .cicd/docker/Dockerfile-titanicai-webapp
-    imageRepository: qbituniverse/titanicai-webapp
+    imageDockerfile: .cicd/dockerfiles/Dockerfile-titanicai-api
+    imageRepository: qbituniverse/titanicai-api
     imageTag: $(imageVersion).$(Build.BuildId)
     imageVersion: 'N/A'
   jobs:

@@ -1,7 +1,7 @@
-FROM qbituniverse/ai-r-core-studio-java:4.0.257
+FROM qbituniverse/ai-r-core-api-java:4.0.254
 
 LABEL version="4.0" \
-	  description="Image to create R Studio environment for the TitanicAI project" \
+ 	  description="Image to create R Api for the TitanicAI project" \
 	  maintainer="marcin.narloch@qbituniverse.com"
 
 RUN R -e "install.packages(c('gmodels', 'e1071', 'caret', 'caretEnsemble', 'C50', 'vcd', 'FSelector', 'rpart', 'party', 'RWeka', 'nnet', 'kernlab', 'naivebayes', 'fastAdaboost'), lib = '/usr/local/lib/R/site-library')" && \
@@ -9,9 +9,7 @@ RUN R -e "install.packages(c('gmodels', 'e1071', 'caret', 'caretEnsemble', 'C50'
 	rm -rf /var/lib/apt/lists/* && \
 	rm -rf /tmp/*
 
-COPY /code/ /home/rstudio/code/
-COPY /input/ /home/rstudio/input/
-COPY /models/ /home/rstudio/models/
+COPY /src/model/code/ /code/
+COPY /src/model/models/titanicai_model.rds /models/
 
-RUN mkdir -p /home/rstudio/output && \
-	chown -R rstudio /home
+CMD ["Rscript", "/code/exec/api.R"]
