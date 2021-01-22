@@ -1,3 +1,0 @@
-# TitanicAI
-
-TitanicAI application

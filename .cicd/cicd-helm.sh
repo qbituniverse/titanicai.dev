@@ -6,8 +6,9 @@ kubectl config get-contexts
 kubectl config use-context docker-desktop
 kubectl config current-context
 
-# deploy app
-helm upgrade titanicai -i --create-namespace --namespace titanicai .cicd/helm/titanicai
+# deploy webapp & api
+helm upgrade titanicai-webapp -i --create-namespace --namespace titanicai .cicd/helm/titanicai-webapp
+helm upgrade titanicai-api -i --create-namespace --namespace titanicai .cicd/helm/titanicai-api
 
 # deploy ingress controller
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx

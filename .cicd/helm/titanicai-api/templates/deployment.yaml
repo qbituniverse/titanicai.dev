@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.api.name }}
+  name: {{ .Values.name }}
   namespace: {{ .Values.namespace }}
   labels:
-    app: {{ .Values.api.name }}
+    app: {{ .Values.name }}
 spec:
   replicas: 1
   revisionHistoryLimit: 3
@@ -16,14 +16,14 @@ spec:
       maxSurge: 25%
   selector:
     matchLabels:
-      app: {{ .Values.api.name }}
+      app: {{ .Values.name }}
   template:
     metadata:
       labels:
-        app: {{ .Values.api.name }}
+        app: {{ .Values.name }}
     spec:
       containers:
-      - name: {{ .Values.api.name }}
-        image: {{ .Values.api.image }}
+      - name: {{ .Values.name }}
+        image: {{ .Values.image }}
         ports:
         - containerPort: 8000

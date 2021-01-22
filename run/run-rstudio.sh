@@ -2,15 +2,15 @@
 # TitanicAI R Studio
 #############################################################################
 # variables
-dockerfile="Dockerfile-titanicai-studio"
-image="qbituniverse/titanicai-studio:local"
-container="titanicai-studio"
+dockerfile="Dockerfile-titanicai-rstudio"
+image="qbituniverse/titanicai-rstudio:local"
+container="titanicai-rstudio"
 
 #############################################################################
 # Create, configure and work with R Studio
 #############################################################################
 # build image
-docker build -t $image -f .cicd/dockerfiles/$dockerfile .
+docker build -t $image -f .cicd/docker/$dockerfile .
 
 # create container
 docker run --name $container -d -p 8012:8787 -v $container:/home/rstudio -e DISABLE_AUTH=true $image

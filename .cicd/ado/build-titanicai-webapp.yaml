@@ -7,7 +7,7 @@ trigger:
     - main
   paths:
     include:
-    - .cicd/dockerfiles/Dockerfile-titanicai-webapp
+    - .cicd/docker/Dockerfile-titanicai-webapp
     - .cicd/ado/build-titanicai-webapp.yaml
     - src/webapp/WebApp
 
@@ -21,16 +21,16 @@ resources:
     endpoint: qbituniverse
 
 stages:
-- stage: DockerBuild
-  displayName: 'Build Docker Image'
+- stage: DockerBuildWebapp
+  displayName: 'Build Docker Image for Webapp'
   variables:
-    imageDockerfile: .cicd/dockerfiles/Dockerfile-titanicai-webapp
+    imageDockerfile: .cicd/docker/Dockerfile-titanicai-webapp
     imageRepository: qbituniverse/titanicai-webapp
     imageTag: $(imageVersion).$(Build.BuildId)
     imageVersion: 'N/A'
   jobs:
   - job: DockerBuild
-    displayName: 'Build Docker Image'
+    displayName: 'Build Docker Image for Webapp'
     steps:
     - template: builds/build-assign-number.yaml@azure-devops-extensions
       parameters:
@@ -42,3 +42,4 @@ stages:
         imageRepository: $(imageRepository)
         imageDockerfile: $(imageDockerfile)
         imageTag: $(imageTag)
+        addLatestTag: true

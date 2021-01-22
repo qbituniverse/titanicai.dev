@@ -1,0 +1,4 @@
+namespace: #{titanicai.api.namespace}#
+name: #{titanicai.api.name}#
+image: #{titanicai.api.image}#
+host: #{titanicai.api.host}#

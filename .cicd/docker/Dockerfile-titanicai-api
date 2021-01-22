@@ -1,4 +1,4 @@
-FROM qbituniverse/ai-r-core-api-java:4.0.254
+FROM qbituniverse/ai-r-core-api:4.0.263-java
 
 LABEL version="4.0" \
  	  description="Image to create R Api for the TitanicAI project" \
