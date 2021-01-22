@@ -4,7 +4,7 @@ services:
     image: qbituniverse/titanicai-api:local
     build:
       context: ../..
-      dockerfile: .cicd/dockerfiles/Dockerfile-titanicai-api
+      dockerfile: .cicd/docker/Dockerfile-titanicai-api
     container_name: titanicai-api
     ports:
       - 8011:8000
@@ -16,7 +16,7 @@ services:
     image: qbituniverse/titanicai-webapp:local
     build:
       context: ../..
-      dockerfile: .cicd/dockerfiles/Dockerfile-titanicai-webapp
+      dockerfile: .cicd/docker/Dockerfile-titanicai-webapp
     depends_on:
       - api
     container_name: titanicai-webapp

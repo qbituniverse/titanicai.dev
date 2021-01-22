@@ -1,0 +1,7 @@
+namespace: #{titanicai.webapp.namespace}#
+name: #{titanicai.webapp.name}#
+image: #{titanicai.webapp.image}#
+host: #{titanicai.webapp.host}#
+configuration:
+  Environment: #{titanicai.webapp.configuration.Environment}#
+  BaseUri: #{titanicai.webapp.configuration.BaseUri}#

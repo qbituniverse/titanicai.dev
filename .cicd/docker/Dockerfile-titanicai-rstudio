@@ -1,4 +1,4 @@
-FROM qbituniverse/ai-r-core-studio-java:4.0.257
+FROM qbituniverse/ai-r-core-rstudio:4.0.262-java
 
 LABEL version="4.0" \
 	  description="Image to create R Studio environment for the TitanicAI project" \

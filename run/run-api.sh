@@ -11,7 +11,7 @@ network="titanicai-bridge"
 # Create, configure and work with R Api
 #############################################################################
 # build image
-docker build -t $image -f .cicd/dockerfiles/$dockerfile .
+docker build -t $image -f .cicd/docker/$dockerfile .
 
 # create network & container
 docker network create $network

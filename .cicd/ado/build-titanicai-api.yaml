@@ -7,7 +7,7 @@ trigger:
     - main
   paths:
     include:
-    - .cicd/dockerfiles/Dockerfile-titanicai-api
+    - .cicd/docker/Dockerfile-titanicai-api
     - .cicd/ado/build-titanicai-api.yaml
     - src/model/models/titanicai_model.rds
 
@@ -21,16 +21,16 @@ resources:
     endpoint: qbituniverse
 
 stages:
-- stage: DockerBuild
-  displayName: 'Build Docker Image'
+- stage: DockerBuildApi
+  displayName: 'Build Docker Image for Api'
   variables:
-    imageDockerfile: .cicd/dockerfiles/Dockerfile-titanicai-api
+    imageDockerfile: .cicd/docker/Dockerfile-titanicai-api
     imageRepository: qbituniverse/titanicai-api
     imageTag: $(imageVersion).$(Build.BuildId)
     imageVersion: 'N/A'
   jobs:
   - job: DockerBuild
-    displayName: 'Build Docker Image'
+    displayName: 'Build Docker Image for Api'
     steps:
     - template: builds/build-assign-number.yaml@azure-devops-extensions
       parameters:
@@ -42,3 +42,4 @@ stages:
         imageRepository: $(imageRepository)
         imageDockerfile: $(imageDockerfile)
         imageTag: $(imageTag)
+        addLatestTag: true

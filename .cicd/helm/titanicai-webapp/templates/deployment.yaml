@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.webapp.name }}
+  name: {{ .Values.name }}
   namespace: {{ .Values.namespace }}
   labels:
-    app: {{ .Values.webapp.name }}
+    app: {{ .Values.name }}
 spec:
   replicas: 1
   revisionHistoryLimit: 3
@@ -16,25 +16,25 @@ spec:
       maxSurge: 25%
   selector:
     matchLabels:
-      app: {{ .Values.webapp.name }}
+      app: {{ .Values.name }}
   template:
     metadata:
       labels:
-        app: {{ .Values.webapp.name }}
+        app: {{ .Values.name }}
     spec:
       containers:
-      - name: {{ .Values.webapp.name }}
-        image: {{ .Values.webapp.image }}
+      - name: {{ .Values.name }}
+        image: {{ .Values.image }}
         ports:
         - containerPort: 8000
         env:
         - name: ASPNETCORE_ENVIRONMENT
           valueFrom:
             configMapKeyRef:
-              name: {{ .Values.webapp.name }}-config
+              name: {{ .Values.name }}-config
               key: Environment
         - name: WebApp__AiApi__BaseUri
           valueFrom:
             configMapKeyRef:
-              name: {{ .Values.webapp.name }}-config
+              name: {{ .Values.name }}-config
               key: BaseUri

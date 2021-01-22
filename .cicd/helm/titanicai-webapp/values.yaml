@@ -1,0 +1,7 @@
+namespace: "titanicai"
+name: "titanicai-webapp"
+image: "qbituniverse/titanicai-webapp:latest"
+host: "web.titanicai.localhost"
+configuration:
+  Environment: "Development"
+  BaseUri: "http://titanicai-api.titanicai.svc.cluster.local"
