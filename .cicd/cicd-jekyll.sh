@@ -18,5 +18,8 @@ docker-compose -f .cicd/jekyll/docker-compose.Development.yaml down
 # start up
 docker-compose -f .cicd/jekyll/docker-compose.Production.yaml up
 
+# browse
+start http://localhost:4000
+
 # take down
 docker-compose -f .cicd/jekyll/docker-compose.Production.yaml down

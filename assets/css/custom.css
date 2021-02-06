@@ -1,3 +1,25 @@
+body {
+    color: #000;
+}
+
 .wrapper {
     width: 875px;
+}
+
+header h1 {
+    font-size: 40px;
+}
+
+ul > li > ul {
+    margin: 0;
+}
+
+@media screen and (max-width: 800px) { 
+    .wrapper { width: 100%; } 
+}
+@media screen and (max-width: 480px) { 
+    .wrapper { width: 100%; } 
+}
+@media screen and (max-width: 320px) {
+    .wrapper { width: 100%; } 
 }

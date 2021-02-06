@@ -8,8 +8,8 @@ services:
       - ../../:/usr/src/app
     tty: true
     networks:
-      - frontend
+      - titanicai.dev
 
 networks:
-  frontend:
+  titanicai.dev:
     driver: bridge
