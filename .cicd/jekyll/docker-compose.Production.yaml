@@ -6,8 +6,8 @@ services:
       - 4000:4000
     tty: true
     networks:
-      - frontend
+      - titanicai.dev
 
 networks:
-  frontend:
+  titanicai.dev:
     driver: bridge
