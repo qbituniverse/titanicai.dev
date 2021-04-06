@@ -19,13 +19,16 @@ docker run --name $container -d -p 8012:8787 -v $container:/home/rstudio -e DISA
 start http://localhost:8012
 
 #############################################################################
-# Container operations and pull code down
+# Container operations
 #############################################################################
 # start, stop, exec
 docker start $container
 docker stop $container
 docker exec -it $container bash
 
+#############################################################################
+# Pull code down from container to local file system
+#############################################################################
 # pull code from container
 docker cp $container:/home/rstudio/code/. ./src/model/code/
 docker cp $container:/home/rstudio/input/. ./src/model/input/

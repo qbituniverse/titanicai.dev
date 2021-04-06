@@ -1,7 +1,3 @@
-body {
-    color: #000;
-}
-
 .wrapper {
     width: 875px;
 }
@@ -12,6 +8,27 @@ header h1 {
 
 ul > li > ul {
     margin: 0;
+}
+
+table tbody {
+    vertical-align: top;
+}
+
+.rouge-table {
+    margin: 0;
+}
+
+.rouge-table th, .rouge-table td {
+    padding: 0;
+    border: none;
+}
+
+.rouge-table pre {
+    padding: 5px;
+}
+
+.rouge-gutter {
+    width: 10px;
 }
 
 @media screen and (max-width: 800px) { 

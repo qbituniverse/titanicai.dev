@@ -15,9 +15,9 @@ pr: none
 
 resources:
   repositories:
-  - repository: azure-devops-extensions
+  - repository: platformops.dev
     type: github
-    name: qbituniverse/azure-devops-extensions
+    name: qbituniverse/platformops.dev
     endpoint: qbituniverse
 
 stages:
@@ -32,12 +32,12 @@ stages:
   - job: DockerBuild
     displayName: 'Build Docker Image for Webapp'
     steps:
-    - template: builds/build-assign-number.yaml@azure-devops-extensions
+    - template: content/azure-devops/builds/assign-build-number.yaml@platformops.dev
       parameters:
         imageDockerfile: $(imageDockerfile)
         imageTag: $(imageTag)
 
-    - template: builds/build-docker.yaml@azure-devops-extensions
+    - template: content/azure-devops/builds/build-push-docker-image.yaml@platformops.dev
       parameters:
         imageRepository: $(imageRepository)
         imageDockerfile: $(imageDockerfile)

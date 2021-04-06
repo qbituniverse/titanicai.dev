@@ -1,4 +1,4 @@
-FROM qbituniverse/ai-r-core-api:4.0.263-java
+FROM qbituniverse/ai-r-core-api:4.0.334-java
 
 LABEL version="4.0" \
  	  description="Image to create R Api for the TitanicAI project" \
@@ -12,4 +12,4 @@ RUN R -e "install.packages(c('gmodels', 'e1071', 'caret', 'caretEnsemble', 'C50'
 COPY /src/model/code/ /code/
 COPY /src/model/models/titanicai_model.rds /models/
 
-CMD ["Rscript", "/code/exec/api.R"]
+CMD ["Rscript", "/code/build/api.R"]

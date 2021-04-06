@@ -63,7 +63,7 @@ ModelTuning.Execute.Core <- function(df, settings, bestAccuracy, worstAccuracy, 
             settings$model$naivebayes$laplace <- as.integer(laplace)
             current_model_id <- current_model_id + 1
 
-            model <- Process.Training(df$trainset, df$testset, settings)$model
+            model <- ModelTraining.Execute(df$trainset, df$testset, settings)$model
 
             result <- LogModelStats(model, result)
             result$ModelSettings <- paste("laplace:", settings$model$naivebayes$laplace)
@@ -80,7 +80,7 @@ ModelTuning.Execute.Core <- function(df, settings, bestAccuracy, worstAccuracy, 
             settings$model$c50$trials <- as.integer(trials)
             current_model_id <- current_model_id + 1
 
-            model <- Process.Training(df$trainset, df$testset, settings)$model
+            model <- ModelTraining.Execute(df$trainset, df$testset, settings)$model
 
             result <- LogModelStats(model, result)
             result$ModelSettings <- paste("trials:", settings$model$c50$trials)
@@ -99,7 +99,7 @@ ModelTuning.Execute.Core <- function(df, settings, bestAccuracy, worstAccuracy, 
                 settings$model$nnet$maxit <- as.integer(maxit)
                 current_model_id <- current_model_id + 1
 
-                model <- Process.Training(df$trainset, df$testset, settings)$model
+                model <- ModelTraining.Execute(df$trainset, df$testset, settings)$model
 
                 result <- LogModelStats(model, result)
                 result$ModelSettings <- paste("size:", settings$model$nnet$size, "maxit:", settings$model$nnet$maxit)
@@ -117,7 +117,7 @@ ModelTuning.Execute.Core <- function(df, settings, bestAccuracy, worstAccuracy, 
             settings$model$ksvm$kernel <- as.character(kernel)
             current_model_id <- current_model_id + 1
 
-            model <- Process.Training(df$trainset, df$testset, settings)$model
+            model <- ModelTraining.Execute(df$trainset, df$testset, settings)$model
 
             result <- LogModelStats(model, result)
             result$ModelSettings <- paste("kernel:", settings$model$ksvm$kernel)
@@ -134,7 +134,7 @@ ModelTuning.Execute.Core <- function(df, settings, bestAccuracy, worstAccuracy, 
             settings$model$svm$kernel <- as.character(kernel)
             current_model_id <- current_model_id + 1
 
-            model <- Process.Training(df$trainset, df$testset, settings)$model
+            model <- ModelTraining.Execute(df$trainset, df$testset, settings)$model
 
             result <- LogModelStats(model, result)
             result$ModelSettings <- paste("kernel:", settings$model$svm$kernel)
@@ -149,7 +149,7 @@ ModelTuning.Execute.Core <- function(df, settings, bestAccuracy, worstAccuracy, 
     } else {
         current_model_id <- current_model_id + 1
 
-        model <- Process.Training(df$trainset, df$testset, settings)$model
+        model <- ModelTraining.Execute(df$trainset, df$testset, settings)$model
 
         result <- LogModelStats(model, result)
         result$ModelId <- current_model_id

@@ -1,5 +1,5 @@
 # startup
-source("code/base/startup.R")
+source("code/startup.R")
 
 # exlore data
 titanic.data.clean <- DataQuality.SetFullFactorLevels(Environment.Csv.LoadCleanData())
