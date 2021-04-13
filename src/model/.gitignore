@@ -43,3 +43,6 @@ docs/
 
 # translation temp files
 po/*~
+
+# make sure we add code => build => R files
+!code/build
