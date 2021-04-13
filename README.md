@@ -84,11 +84,11 @@ Then run the commands below to start **TitanicAI** up and use it.
 # start up TitanicAI
 docker-compose up
 
-# browse to TitanicAI Webapp
+# TitanicAI Webapp
 start http://localhost:8010
 
-# TitanicAI Api endpoint URL
-http://localhost:8011/api
+# TitanicAI Api docs
+start http://localhost:8011/__docs__/
 
 # finish and clean up TitanicAI
 docker-compose down
@@ -111,11 +111,11 @@ docker run --name titanicai-webapp -d -p 8010:80 \
 -e WebApp__AiApi__BaseUri=http://titanicai-api:8000 \
 --network=titanicai-bridge qbituniverse/titanicai-webapp:latest
 
-# browse to TitanicAI Webapp
+# TitanicAI Webapp
 start http://localhost:8010
 
-# TitanicAI Api endpoint URL
-http://localhost:8011/api
+# TitanicAI Api docs
+start http://localhost:8011/__docs__/
 
 # finish and clean up TitanicAI
 docker rm -fv titanicai-api

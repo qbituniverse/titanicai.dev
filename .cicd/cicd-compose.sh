@@ -10,7 +10,7 @@ docker-compose -f .cicd/compose/docker-compose.GitHub.yaml up
 
 # launch webapp & api
 start http://localhost:8010
-start http://localhost:8011/api/ping
+start http://localhost:8011/__docs__/
 
 # clean-up
 docker-compose -f .cicd/compose/docker-compose.GitHub.yaml down
@@ -23,7 +23,7 @@ docker-compose -f .cicd/compose/docker-compose.DockerHub.yaml up
 
 # launch webapp & api
 start http://localhost:8010
-start http://localhost:8011/api/ping
+start http://localhost:8011/__docs__/
 
 # clean-up
 docker-compose -f .cicd/compose/docker-compose.DockerHub.yaml down
