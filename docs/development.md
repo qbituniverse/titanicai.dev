@@ -80,7 +80,7 @@ docker network create $network
 docker run --name $container -d -p 8011:8000 --network=$network $image
 
 # test API
-start http://localhost:8011/api/ping
+start http://localhost:8011/__docs__/
 ```
 
 #### Pause and Restart R Api

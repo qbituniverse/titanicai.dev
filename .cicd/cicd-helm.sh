@@ -26,7 +26,7 @@ helm list --all -n titanicai
 
 # launch webapp & api
 start http://web.titanicai.localhost
-start http://api.titanicai.localhost/api/ping
+start http://api.titanicai.localhost/__docs__/
 
 # clean-up
 kubectl delete namespace titanicai

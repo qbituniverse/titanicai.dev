@@ -108,7 +108,7 @@ helm list --all -n titanicai
 
 ```bash
 start http://web.titanicai.localhost
-start http://api.titanicai.localhost
+start http://api.titanicai.localhost/__docs__/
 ```
 
 #### Take Down from Kubernetes

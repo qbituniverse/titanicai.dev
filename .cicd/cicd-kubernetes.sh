@@ -14,7 +14,7 @@ kubectl get all -n titanicai
 
 # launch webapp & api
 start http://localhost:8010
-start http://localhost:8011/api/ping
+start http://localhost:8011/__docs__/
 
 # clean-up
 kubectl delete namespace titanicai
