@@ -4,9 +4,9 @@ description: R Model Code Overview
 permalink: /model/
 ---
 
-## R Model Code Overview
+> ## R Model Code Overview
 
-### Project Structure
+> ### Project Structure
 
 Location: **src/model**
 
@@ -17,9 +17,9 @@ Location: **src/model**
 |**models**|Trained AI models stored in RDS format.<br />These are automatically saved into this folder once the model build process is completed.|
 |**output**|Output data files stored in CSV format.<br />Clean Data: This file needs to be copied into *input* folder if the intention is to use it for AI model training.<br />Tuning Results: model tuning results.<br />Testing Results: model testing results.<br />Testing Summary: model testing summary.|
 
-### Code Overview
+> ### Code Overview
 
-#### Root
+> #### Root
 
 Location: **src/model/code**
 
@@ -27,7 +27,7 @@ Location: **src/model/code**
 |-----|-----|
 |**startup.R**|Project startup file, run it every time you start the TitanicAI API or Model build.<br />It links all R files, pre-loads functions and libraries.|
 
-#### Configuration
+> #### Configuration
 
 Location: **src/model/code/base**
 
@@ -37,7 +37,7 @@ Location: **src/model/code/base**
 |**environment.R**|Core methods to provide environment wide functionality such as saving/loading files or logging.<br />Naming convention: *Environment.FUNCTION_NAME()*.|
 |**settings.R**|Project settings, such as data input files names, models, model parameters.<br />List data type.<br />Naming convention: *settings$SETTING_NAME*.|
 
-#### Functions
+> #### Functions
 
 Location: **src/model/code/functions**
 
@@ -50,7 +50,7 @@ Location: **src/model/code/functions**
 |**model_training.R**|Functions for training new models and making predictions.<br />Takes DataFrame with train data and settings for model parameters.<br />Naming convention: *ModelTraining.FUNCTION_NAME()*.|
 |**model_tuning.R**|Functions for tuning new models while training, simply runs iterations per model to create best/worst performers.<br />Takes train data sets in DataFrame format and trained Model object.<br />Naming convention: *ModelTuning.FUNCTION_NAME()*.|
 
-#### Processes
+> #### Processes
 
 Location: **src/model/code/processes**
 
@@ -62,7 +62,7 @@ Location: **src/model/code/processes**
 |**testing.R**|Tests trained model against test data set.<br />Takes trained model and test data and produces test report in CSV format in the *output* folder.<br />Naming convention: *Process.Testing()*.|
 |**tuning.R**|Performs model training and tuning.<br />Runs iterations of model settings, trains model per iteration, runs statistic checks and generates report in CSV format in the *output* folder.<br />Naming convention: *Process.Tuning()*.|
 
-#### Build
+> #### Build
 
 Location: **src/model/code/build**
 
@@ -71,7 +71,7 @@ Location: **src/model/code/build**
 |**api.R**|Builds R API. Loads *startup.R*, loads model from *models* folder and runs process from *publish.R* process to expose the AI model via API endpoint.|
 |**model.R**|Builds R Model. Loads *startup.R*, runs selection of processes from *preprocess.R*, *analysis.R*, *tuning.R* and *testing.R* to build the AI model.|
 
-#### Scratch
+> #### Scratch
 
 Location: **src/model/code/scratch**
 
