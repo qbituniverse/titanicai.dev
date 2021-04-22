@@ -1,0 +1,156 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: titanicai-demo
+
+---
+
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: titanicai-demo-cert
+  namespace: titanicai-demo
+spec:
+  domains:
+    - demo.titanicai.dev
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: titanicai-demo-webapp
+  namespace: titanicai-demo
+  labels:
+    app: titanicai-demo-webapp
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  selector:
+    matchLabels:
+      app: titanicai-demo-webapp
+  template:
+    metadata:
+      labels:
+        app: titanicai-demo-webapp
+    spec:
+      containers:
+      - name: titanicai-demo-webapp
+        image: qbituniverse/titanicai-webapp:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          valueFrom:
+            configMapKeyRef:
+              name: titanicai-demo-webapp-config
+              key: Environment
+        - name: WebApp__AiApi__BaseUri
+          valueFrom:
+            configMapKeyRef:
+              name: titanicai-demo-webapp-config
+              key: BaseUri
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: titanicai-demo-api
+  namespace: titanicai-demo
+  labels:
+    app: titanicai-demo-api
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  selector:
+    matchLabels:
+      app: titanicai-demo-api
+  template:
+    metadata:
+      labels:
+        app: titanicai-demo-api
+    spec:
+      containers:
+      - name: titanicai-demo-api
+        image: qbituniverse/titanicai-api:latest
+        ports:
+        - containerPort: 8000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: titanicai-demo-webapp
+  namespace: titanicai-demo
+spec:
+  selector:
+    app: titanicai-demo-webapp
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: ClusterIP
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: titanicai-demo-api
+  namespace: titanicai-demo
+spec:
+  selector:
+    app: titanicai-demo-api
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8000
+  type: ClusterIP
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: titanicai-demo-webapp
+  namespace: titanicai-demo
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: titanicai-demo-ip
+    networking.gke.io/managed-certificates: titanicai-demo-cert
+    kubernetes.io/ingress.class: "gce"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: titanicai-demo-webapp
+            port:
+              number: 80
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: titanicai-demo-webapp-config
+  namespace: titanicai-demo
+data:
+  Environment: Production
+  BaseUri: http://titanicai-demo-api.titanicai-demo.svc.cluster.local

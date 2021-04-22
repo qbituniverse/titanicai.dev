@@ -4,11 +4,11 @@ description: Deployment Process
 permalink: /deployment/
 ---
 
-## Deployment Process
+> ## Deployment Process
 
-### Docker Compose
+> ### Docker Compose
 
-Location: **.cicd/compose** and **.cicd/cicd-compose.sh**
+Location: **.cicd/compose** and **.cicd/compose/cicd-compose.sh**
 
 #### Start up with Docker Compose
 
@@ -36,9 +36,9 @@ docker-compose -f .cicd/compose/docker-compose.GitHub.yaml down
 docker-compose -f .cicd/compose/docker-compose.DockerHub.yaml down
 ```
 
-### Kubernetes
+> ### Kubernetes
 
-Location: **.cicd/kubernetes** and **.cicd/cicd-kubernetes.sh**
+Location: **.cicd/kubernetes** and **.cicd/kubernetes/cicd-kubernetes.sh**
 
 #### Configure Kubernetes Context
 
@@ -70,9 +70,9 @@ start http://localhost:8010
 kubectl delete namespace titanicai
 ```
 
-### Helm
+> ### Helm
 
-Location: **.cicd/helm** and **.cicd/cicd-helm.sh**
+Location: **.cicd/helm** and **.cicd/helm/cicd-helm.sh**
 
 #### Configure Kubernetes Context
 
