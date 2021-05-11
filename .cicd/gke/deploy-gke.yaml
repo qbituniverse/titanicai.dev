@@ -12,7 +12,7 @@ metadata:
   namespace: titanicai-demo
 spec:
   domains:
-    - demo.titanicai.dev
+    - demo-gke.titanicai.dev
 
 ---
 
@@ -83,9 +83,23 @@ spec:
       labels:
         app: titanicai-demo-api
     spec:
+      restartPolicy: Always
       containers:
       - name: titanicai-demo-api
         image: qbituniverse/titanicai-api:latest
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+            add: ["NET_BIND_SERVICE"]
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
         ports:
         - containerPort: 8000
 
