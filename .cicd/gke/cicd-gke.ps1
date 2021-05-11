@@ -16,7 +16,7 @@ $machineType = "custom-2-2048"
 $machineImage = "COS"
 $diskType = "pd-standard"
 $diskSize = "32"
-$ipAddressName = "titanicai-demo"
+$ipAddressName = "titanicai-demo-ip"
 
 #############################################################################
 # Provision GCP Resources
@@ -75,7 +75,7 @@ kubectl config get-contexts
 kubectl config current-context
 
 # Deploy Application to GKE
-kubectl apply -f deploy-gke.yaml
+kubectl apply -f .cicd/gke/deploy-gke.yaml
 
 # Check Deployments
 kubectl get all -n titanicai-demo
