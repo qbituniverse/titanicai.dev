@@ -32,6 +32,19 @@ spec:
       containers:
       - name: titanicai-api
         image: qbituniverse/titanicai-api:latest
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+            add: ["NET_BIND_SERVICE"]
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
+            memory: "512Mi"
+            cpu: "400m"
         ports:
         - containerPort: 8000
 
@@ -96,6 +109,19 @@ spec:
       containers:
       - name: titanicai-webapp
         image: qbituniverse/titanicai-webapp:latest
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+            add: ["NET_BIND_SERVICE"]
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
         ports:
         - containerPort: 80
         env:

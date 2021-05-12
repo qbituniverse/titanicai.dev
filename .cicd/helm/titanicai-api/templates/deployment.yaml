@@ -25,5 +25,18 @@ spec:
       containers:
       - name: {{ .Values.name }}
         image: {{ .Values.image }}
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+            add: ["NET_BIND_SERVICE"]
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
+            memory: "512Mi"
+            cpu: "400m"
         ports:
         - containerPort: 8000
