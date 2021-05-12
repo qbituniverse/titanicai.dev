@@ -62,6 +62,9 @@ Write-Host "Your IP Address =>" `
 --global `
 --format="value(address)")
 
+# Configure DNS
+# A Record => demo-gke => Your IP Address
+
 #############################################################################
 # Deploy Application in GKE
 #############################################################################
