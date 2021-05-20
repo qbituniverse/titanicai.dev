@@ -93,7 +93,7 @@ helm install cert-manager jetstack/cert-manager `
 # Deploy Applications in AKS
 #############################################################################
 # Deploy Sample AKS Application
-kubectl apply -f yaml/deploy.yaml
+kubectl apply -f .cicd/aks/deploy-aks.yaml
 
 # Check Deployments
 kubectl get all -n titanicai-demo
