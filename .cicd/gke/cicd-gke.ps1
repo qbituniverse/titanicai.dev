@@ -91,7 +91,7 @@ kubectl get managedcertificate -n titanicai-demo
 # Delete GKE Deployments
 kubectl delete namespace titanicai-demo
 
-# Delere GCP Resources
+# Delete GCP Resources
 gcloud container clusters delete $gkeName `
 --project $projectName `
 --zone $zone `
