@@ -18,7 +18,7 @@ permalink: /overview/
 
 |Folder|Description|
 |-----|-----|
-|**.cicd**|**ado**: Azure DevOps Build Yaml<br />**compose**: Docker Compose Yaml<br />**docker**: Dockerfiles<br />**gke**: GKE Deployment<br />**helm**: Helm Chart Yaml<br />**jekyll**: Jekyll Files<br />**kubernetes**: Kubernetes Yaml<br />|
+|**.cicd**|**ado**: Azure DevOps Build Yaml<br />**aks**: AKS Deployment<br />**compose**: Docker Compose Yaml<br />**docker**: Dockerfiles<br />**eks**: EKS Deployment<br />**gke**: GKE Deployment<br />**helm**: Helm Chart Yaml<br />**jekyll**: Jekyll Files<br />**kubernetes**: Kubernetes Yaml<br />|
 |**docs**|Solution documentation files, refer to **Documentation** section on the home page.|
 |**run**|**run-api.sh**: run Api locally<br />**run-rstudio.sh**: run R Studio locally<br />**run-webapp.sh**: run Webapp locally|
 |**src**|**model**: R Code source code<br />**webapp**: ASPNET C# Web application source code|
